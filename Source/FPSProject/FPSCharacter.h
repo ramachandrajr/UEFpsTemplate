@@ -6,6 +6,12 @@
 #include "GameFramework/Character.h"
 #include "FPSCharacter.generated.h"
 
+
+
+class UCameraComponent;
+
+
+
 UCLASS()
 class FPSPROJECT_API AFPSCharacter : public ACharacter
 {
@@ -41,4 +47,8 @@ public:
     // Clears jump flag when key is released.
     UFUNCTION()
     void StopJump();
+
+    // FPS camera.
+    UPROPERTY(VisibleAnywhere)
+    UCameraComponent* FPSCameraComponent;
 };
