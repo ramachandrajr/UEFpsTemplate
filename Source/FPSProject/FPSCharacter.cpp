@@ -35,6 +35,34 @@ void AFPSCharacter::Tick(float DeltaTime)
 void AFPSCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+    
+    // Set up "movement" bindings.
+    /*  The first argument corresponds to new axis mapping we created in settings
+        second to object and third method which should be called if axis is activated
+        truth is axis will be polled always */
+    PlayerInputComponent->BindAxis("MoveForward", this, &AFPSCharacter::MoveForward);
+    PlayerInputComponent->BindAxis("MoveRight", this, &AFPSCharacter::MoveRight);
 
+    // Set up "look" bindings.
+    PlayerInputComponent->BindAxis("Turn", this, &AFPSCharacter::AddControllerYawInput);
+    PlayerInputComponent->BindAxis("LookUp", this, &AFPSCharacter::AddControllerPitchInput);
+}
+
+
+
+void AFPSCharacter::MoveForward(float Value)
+{
+    // Find out which way is "forward" and record that player wants to move that way.
+    FVector Direction = FRotationMatrix(Controller->GetControlRotation()).GetScaledAxis(EAxis::X);
+    AddMovementInput(Direction, Value);
+}
+
+
+
+void AFPSCharacter::MoveRight(float Value)
+{
+    // Find out which way is "right" and record that player wants to move that way.
+    FVector Direction = FRotationMatrix(Controller->GetControlRotation()).GetScaledAxis(EAxis::Y);
+    AddMovementInput(Direction, Value);
 }
 
