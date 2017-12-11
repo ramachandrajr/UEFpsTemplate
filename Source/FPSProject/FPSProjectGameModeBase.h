@@ -12,9 +12,9 @@
 UCLASS()
 class FPSPROJECT_API AFPSProjectGameModeBase : public AGameModeBase
 {
-	GENERATED_BODY()
-	
-	
+    GENERATED_BODY()
+
+    virtual void StartPlay() override;
 	
 	
 };
