@@ -14,10 +14,11 @@ AFPSProjectile::AFPSProjectile()
 
     // Use a sphere as a simple collison representation.
     CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComponent"));
+    CollisionComponent->BodyInstance.SetCollisionProfileName(TEXT("Projectile"));
     // Set the sphere's collision radius.
-    CollisionComponent->InitSphereRadius(15.f);
+    CollisionComponent->InitSphereRadius(15.f);    
     // Set the root component to be collison component.
-    RootComponent = CollisionComponent;
+    RootComponent = CollisionComponent;    
 
     /* Projectile movement setup */
     /* Experiment on these once projectile starts working */
@@ -29,6 +30,9 @@ AFPSProjectile::AFPSProjectile()
     ProjectileMovementComponent->bShouldBounce = true;
     ProjectileMovementComponent->Bounciness = 0.3f;
     /* /Experiment on these once projectile starts working */
+
+    // Die after 3 seconds
+    InitialLifeSpan = 3.f;
 }
 
 

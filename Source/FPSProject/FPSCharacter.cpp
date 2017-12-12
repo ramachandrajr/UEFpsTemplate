@@ -128,12 +128,10 @@ void AFPSCharacter::Fire()
     FVector CameraLocation;
     FRotator CameraRotation;
     GetActorEyesViewPoint(CameraLocation, CameraRotation);
-    
-        
+       
+
     // Transform MuzzleOffset from camera space to world space.
-    //FVector MuzzleLocation = CameraLocation + FTransform(CameraRotation).TransformVector(MuzzleOffset);
-    // another way to right the above
-    FVector MuzzleLocation = CameraLocation + (MuzzleOffset + CameraRotation.Vector());
+    FVector MuzzleLocation = CameraLocation + FTransform(CameraRotation).TransformVector(MuzzleOffset);    
     FRotator MuzzleRotation = CameraRotation;
     // Skew the aim to be slightly upwards.
     MuzzleRotation.Pitch += 10.f;
